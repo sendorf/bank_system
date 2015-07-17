@@ -18,7 +18,7 @@ Define a set of data structures to accurately reflect banks, accounts and
 transfers. Make sure that new types of accounts and transfers can be added to
 the bank with minimal effort.
 
-##Part 2 (Recommended time: 135 minutes)
+###Part 2 (Recommended time: 135 minutes)
 Create an initial system consisting of two banks with at least two accounts each.
 Create the different types of transfers for intra-bank and inter-bank transfers.
 

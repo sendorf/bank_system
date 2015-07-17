@@ -97,4 +97,46 @@ describe BankSystem::Bank do
       end
     end
   end
+
+  describe '.make_transfer_with_accounts' do
+    context 'makes a transfer between 2 accounts' do
+
+      it 'Correct intra bank transaction' do
+        user = BankSystem::Person.new("Jim")
+        4.times do
+          account = BankSystem::Account.new(rand(10000), user)
+          subject.add_account account
+        end
+        expect(subject.make_transfer_with_accounts subject.accounts.first, subject.accounts.last, subject.accounts.first.balance).to eq([true, nil])
+      end
+
+      it 'Wrong intra bank transaction' do
+        user = BankSystem::Person.new("Jim")
+        4.times do
+          account = BankSystem::Account.new(rand(10000), user)
+          subject.add_account account
+        end
+        expect(subject.make_transfer_with_accounts subject.accounts.first, subject.accounts.last, (subject.accounts.first.balance + 500)).to eq([false, nil])
+      end
+
+      it 'Wrong inter bank transaction' do
+        user = BankSystem::Person.new("Jim")
+        4.times do
+          account = BankSystem::Account.new(rand(10000), user)
+          subject.add_account account
+        end
+        expect(subject.make_transfer_with_accounts subject.accounts.first, BankSystem::Account.new(rand(10000),user), 1100).to eq([false, nil])
+      end
+
+      it 'Correct inter bank transaction' do
+        user = BankSystem::Person.new("Jim")
+        4.times do
+          account = BankSystem::Account.new(rand(10000), user)
+          subject.add_account account
+        end
+        account = BankSystem::Account.new(rand(10000), user)
+        expect(subject.make_transfer_with_accounts(subject.accounts.first, account, 1000)).to eq([true, account])
+      end
+    end
+  end
 end

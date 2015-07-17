@@ -1,6 +1,6 @@
 module BankSystem
 	class Transfer
-		attr_reader :sender, :receiver, :amount
+		attr_reader :sender, :receiver, :amount, :commission
 
 		def initialize(sender, receiver, amount)
 			@sender = sender

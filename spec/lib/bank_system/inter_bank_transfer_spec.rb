@@ -20,7 +20,7 @@ describe BankSystem::InterBankTransfer do
       end
 
       it 'The transfer has an amount' do
-        expect(transfer.amount).to eq amount
+        expect(transfer.amount).to eq (amount -5)
       end
 
       it 'The transfer has a commision' do

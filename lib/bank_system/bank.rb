@@ -21,6 +21,7 @@ module BankSystem
 			@accounts.each do |account|
 				(accounts << account) if account.owner == person
 			end
+			return accounts
 		end
 
 		def make_transfer_with_accounts account1, account2, amount
@@ -30,8 +31,8 @@ module BankSystem
 			if index2
 				account1.balance -= amount
 				account2.balance += amount
-				accounts[index1] = account1
-				accounts[index2] = account2
+				self.accounts[index1].balance = account1.balance
+				self.accounts[index2].balance = account2.balance
 				add_transfer BankSystem::IntraBankTransfer.new(account1, account2, amount)
 				return [true, nil]
 			else
@@ -40,8 +41,8 @@ module BankSystem
 				puts "Error = " + error.to_s
 				if error > 0.3
 					account1.balance -= amount
-					account2.balance += amount
-					accounts[index1] = account1
+					account2.balance += (amount - 5)
+					self.accounts[index1].balance = account1.balance
 					add_transfer BankSystem::InterBankTransfer.new(account1, account2, amount)
 					return [true, account2]
 				else 

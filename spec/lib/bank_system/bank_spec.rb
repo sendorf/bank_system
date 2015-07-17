@@ -15,7 +15,8 @@ describe BankSystem::Bank do
       it 'Gives back the list of accounts already introduced in the bank' do
         accounts = []
         4.times do
-          account = BankSystem::Account.new(rand(10000))
+          person = BankSystem::Person.new("Emma")
+          account = BankSystem::Account.new(rand(10000), person)
           subject.add_account account
           accounts << account
         end
@@ -37,8 +38,10 @@ describe BankSystem::Bank do
       it 'Gives back the list of transfers already introduced in the bank' do
         transfers = []
         4.times do
-          sender = BankSystem::Account.new(rand(10000))
-          receiver = BankSystem::Account.new(rand(10000))
+          person = BankSystem::Person.new("Emma")
+          person1 = BankSystem::Person.new("Jim")
+          sender = BankSystem::Account.new(rand(10000), person)
+          receiver = BankSystem::Account.new(rand(10000), person1)
           amount = rand(sender.balance)
           transfer = BankSystem::Transfer.new(sender, receiver, amount)
           subject.add_transfer transfer

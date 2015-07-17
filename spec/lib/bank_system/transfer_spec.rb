@@ -4,8 +4,10 @@ describe BankSystem::Transfer do
 
   describe '.new' do
     context 'Creates a Transfer' do
-      sender = BankSystem::Account.new(rand(10000))
-      receiver = BankSystem::Account.new(rand(10000))
+      person = BankSystem::Person.new("Emma")
+      person1 = BankSystem::Person.new("Jim")
+      sender = BankSystem::Account.new(rand(10000), person)
+      receiver = BankSystem::Account.new(rand(10000), person1)
       amount = rand(sender.balance)
       transfer = BankSystem::Transfer.new(sender, receiver, amount)
 

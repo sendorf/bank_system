@@ -9,7 +9,7 @@ describe BankSystem::Bank do
       end
 
       it 'Gives back the account list' do
-        expect(subject.accounts).to be []
+        expect(subject.accounts).to eq []
       end
 
       it 'Gives back the list of accounts already introduced in the bank' do

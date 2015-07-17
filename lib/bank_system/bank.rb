@@ -15,5 +15,12 @@ module BankSystem
 		def add_transfer transfer
 			self.transfers << transfer
 		end
+
+		def find_accounts_by_person person
+			accounts = []
+			@accounts.each do |account|
+				(accounts << account) if account.owner == person
+			end
+		end
 	end
 end

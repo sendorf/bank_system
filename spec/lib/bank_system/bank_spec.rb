@@ -70,7 +70,30 @@ describe BankSystem::Bank do
           subject.add_account account
           accounts << account
         end
-        expect(subject.find_accounts_by_person(user)).to eq account
+        expect(subject.find_accounts_by_person(user)).to eq accounts
+      end
+    end
+  end
+
+  describe '.find_accounts_by_person' do
+    context 'Gives the list of accounts of a user in a bank' do
+      user = BankSystem::Person.new("Jim")
+      it 'if the given user has not accounts in the bank' do
+        expect(subject.find_accounts_by_person(user).empty?).to be true
+      end
+
+      it 'if the list is empty' do
+        expect(subject.find_accounts_by_person(user)).to eq []
+      end
+
+      it 'Gives back the list of accounts of the user already introduced in the bank' do
+        accounts = []
+        4.times do
+          account = BankSystem::Account.new(rand(10000), user)
+          subject.add_account account
+          accounts << account
+        end
+        expect(subject.find_accounts_by_person(user)).to eq accounts
       end
     end
   end

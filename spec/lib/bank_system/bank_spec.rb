@@ -41,6 +41,7 @@ describe BankSystem::Bank do
           receiver = BankSystem::Account.new(rand(10000))
           amount = rand(sender.balance)
           transfer = BankSystem::Transfer.new(sender, receiver, amount)
+          subject.add_transfer transfer
           transfers << transfer
         end
         expect(subject.transfers).to eq transfers
